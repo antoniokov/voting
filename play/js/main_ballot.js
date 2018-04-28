@@ -17,7 +17,7 @@ function main(ballotType){
 			model.addVoters({
 				dist: SingleVoter,
 				type: VoterType,
-				x:81, y:92
+				x:89, y:92
 			});
 			model.addCandidate("square", 41, 50);
 			model.addCandidate("triangle", 153, 95);
