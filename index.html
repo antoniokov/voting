@@ -340,6 +340,20 @@
             Array.prototype.forEach.call(frames, function(f) {
                 f.contentWindow.model.update();
             });
+        }, 1000);
+
+        setTimeout(function () {
+            const frames = document.getElementsByClassName("play-frame");
+            Array.prototype.forEach.call(frames, function(f) {
+                f.contentWindow.model.update();
+            });
+        }, 3000);
+
+        setTimeout(function () {
+            const frames = document.getElementsByClassName("play-frame");
+            Array.prototype.forEach.call(frames, function(f) {
+                f.contentWindow.model.update();
+            });
         }, 5000);
     </script>
 </body>
