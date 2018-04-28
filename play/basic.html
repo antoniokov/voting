@@ -28,10 +28,11 @@ Loader.onload = function(){
 		model.addVoters({
 			dist: SingleVoter,
 			type: PluralityVoter,
-			x:125, y:200
+			x:125, y:180
 		});
-        model.addCandidate("square", 50, 125);
-        model.addCandidate("triangle", 250, 125);
+        model.addCandidate("square", 50, 200);
+        model.addCandidate("triangle", 250, 200);
+        model.addCandidate("bob", 150, 75);
 	};
 	model.onUpdate = function(){
 		var id = model.voters[0].ballot.vote;
