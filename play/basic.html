@@ -3,9 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/model.css">
-</head>
-<body></body>
-</html>
 
 <script src="js/Text.js"></script>
 <script src="js/helpers.js"></script>
@@ -19,6 +16,14 @@
 <script src="js/Election.js"></script>
 
 <script>
+
+Loader.load([
+	"img/voter_face.png",
+	"img/square.png",
+	"img/triangle.png",
+	"img/bob.png"
+]);
+
 Loader.onload = function(){
 
 	// SELF CONTAINED MODEL
@@ -45,10 +50,8 @@ Loader.onload = function(){
 	model.init();
 
 };
-Loader.load([
-	"img/voter_face.png",
-	"img/square.png",
-	"img/triangle.png",
-	"img/bob.png"
-]);
 </script>
+</head>
+
+<body></body>
+</html>
