@@ -29,6 +29,9 @@ p {
     margin-top: 10px;
 }
 
+iframe {
+    border: none;
+}
 
 .article-body {
     font-size: 15px;
