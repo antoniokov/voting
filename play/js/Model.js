@@ -73,6 +73,9 @@ function Model(config){
 	self.init = function(){
 		self.onInit();
 		self.update();
+        setTimeout(function () {
+            model.update();
+        }, 100);
 	};
 
 	// Reset!

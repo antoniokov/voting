@@ -5,7 +5,7 @@ Loader.load = function(imagePaths){
 	var assetsToLoad = imagePaths.length;
 	var _onAssetLoad = function(){
 		assetsToLoad--;
-		if(assetsToLoad==0){
+		if(assetsToLoad === 0){
 			Loader.onload();
 		}
 	};
