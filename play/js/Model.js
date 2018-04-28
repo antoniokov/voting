@@ -73,9 +73,18 @@ function Model(config){
 	self.init = function(){
 		self.onInit();
 		self.update();
+
         setTimeout(function () {
             model.update();
-        }, 100);
+        }, Math.floor((Math.random() * 150) + 50));
+
+        setTimeout(function () {
+            model.update();
+        }, Math.floor((Math.random() * 1500) + 500));
+
+        setTimeout(function () {
+            model.update();
+        }, Math.floor((Math.random() * 2500) + 1500));
 	};
 
 	// Reset!
