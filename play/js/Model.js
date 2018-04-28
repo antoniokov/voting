@@ -71,20 +71,23 @@ function Model(config){
 	// Init!
 	self.onInit = function(){}; // TO IMPLEMENT
 	self.init = function(){
-		self.onInit();
-		self.update();
-
         setTimeout(function () {
+            console.log(config, self, '1 updated');
             model.update();
         }, Math.floor((Math.random() * 150) + 50));
 
         setTimeout(function () {
+            console.log(config, self, '2 updated');
             model.update();
         }, Math.floor((Math.random() * 1500) + 500));
 
         setTimeout(function () {
+            console.log(config, self, '3 updated');
             model.update();
         }, Math.floor((Math.random() * 2500) + 1500));
+
+		self.onInit();
+		self.update();
 	};
 
 	// Reset!
