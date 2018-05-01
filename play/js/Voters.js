@@ -276,7 +276,7 @@ function PluralityVoter(model){
 		y = y*2;
 
 		// What fill?
-		var fill = Candidate.graphics[ballot.vote].fill;
+		var fill = candidates[ballot.vote].fill;
 		ctx.fillStyle = fill;
 
 		// Just draw a circle.

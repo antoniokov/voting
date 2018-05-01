@@ -6,6 +6,7 @@
 
 <script src="js/Text.js"></script>
 <script src="js/helpers.js"></script>
+<script src="data/candidates.js"></script>
 <script src="js/minpubsub.js"></script>
 <script src="js/Loader.js"></script>
 <script src="js/Mouse.js"></script>
@@ -41,8 +42,8 @@ Loader.onload = function(){
 	};
 	model.onUpdate = function(){
 		var id = model.voters[0].ballot.vote;
-		var color = Candidate.graphics[id].fill;
-		var text = "голос за <b style='color:"+color+"'>"+translate(id)+"</b>";
+		var color = candidates[id].fill;
+		var text = "голос за <b style='color:"+color+"'>"+candidates[id].label+"</b>";
 		model.caption.innerHTML = text;
 	};
 

@@ -374,7 +374,7 @@ var _countLoser = function(tally){
 }
 
 var _colorWinner = function(model, winner){
-	var color = (winner) ? Candidate.graphics[winner].fill : "";
+	var color = (winner) ? candidates[winner].fill : "";
 	model.canvas.style.borderColor = color;
 	return color;
 }
