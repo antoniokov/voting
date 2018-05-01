@@ -184,7 +184,10 @@ function main(config){
 			data: votingSystems,
 			onChoose: onChooseSystem
 		});
-		document.querySelector("#left").appendChild(chooseSystem.dom);
+
+		if (initialConfig.features > 0) {
+            document.querySelector("#left").appendChild(chooseSystem.dom);
+		}
 
 		// How many voters?
 		if(initialConfig.features>=2){ // CANDIDATES as feature.
@@ -273,27 +276,27 @@ function main(config){
 		//////////////////////////
 
 		// CREATE A RESET BUTTON
-		var resetDOM = document.createElement("div");
-		resetDOM.id = "reset";
-		resetDOM.innerHTML = "сбросить";
-		resetDOM.style.top = "340px";
-		resetDOM.style.left = "350px";
-		resetDOM.onclick = function(){
-			
-			config = JSON.parse(JSON.stringify(initialConfig)); // RESTORE IT!
+		if (initialConfig.features > 0) {
+            var resetDOM = document.createElement("div");
+            resetDOM.id = "reset";
+            resetDOM.innerHTML = "сбросить";
+            resetDOM.style.top = "340px";
+            resetDOM.style.left = "350px";
+            resetDOM.onclick = function(){
 
-			// Reset manually, coz update LATER.
-			model.reset(true);
-			model.onInit();
-			setInPosition();
-			
-			// Back to ol' UI
-			selectUI();
+                config = JSON.parse(JSON.stringify(initialConfig)); // RESTORE IT!
 
-		};
-		document.body.appendChild(resetDOM);
+                // Reset manually, coz update LATER.
+                model.reset(true);
+                model.onInit();
+                setInPosition();
 
+                // Back to ol' UI
+                selectUI();
 
+            };
+            document.body.appendChild(resetDOM);
+		}
 
 		///////////////////////////
 		////// SAVE POSITION //////
