@@ -79,10 +79,10 @@ function Button(buttonConfig, onChoose){
 
 	self.dom = document.createElement("div");
 	self.dom.setAttribute("class", "button");
-	self.dom.style.marginRight = buttonConfig.margin+"px";
+	self.dom.style.marginRight = buttonConfig.buttonMargin+"px";
 
 	// Click!
-	self.dom.innerHTML = translate(buttonConfig.name);
+	self.dom.innerHTML = buttonConfig.label;
 	self.onClick = function(){
 		onChoose(self, buttonConfig);
 	};

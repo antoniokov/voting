@@ -341,7 +341,9 @@
         updateDelays.forEach(function (d) {
             setTimeout(function () {
                 Array.prototype.forEach.call(iframes, function(f) {
-                    f.contentWindow.model.update();
+                    if (f.contentWindow.model) {
+                        f.contentWindow.model.update();
+                    }
                 });
             }, d);
         });

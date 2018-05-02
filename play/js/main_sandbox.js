@@ -68,20 +68,18 @@ function main(config){
 			model.numOfCandidates = config.candidates;
 			model.numOfVoters = config.voters;
 			model.system = config.system;
-			var votingSystem = votingSystems.filter(function(system){
-				return(system.name==model.system);
-			})[0];
+			var votingSystem = systems[model.system];
 			model.voterType = votingSystem.voter;
 			model.election = votingSystem.election;
 
 			// Voters
 			var num = model.numOfVoters;
 			var voterPositions;
-			if(num==1){
+			if(num===1){
 				voterPositions = [[150,150]];
-			}else if(num==2){
+			}else if(num===2){
 				voterPositions = [[150,100],[150,200]];
-			}else if(num==3){
+			}else if(num===3){
 				voterPositions = [[150,115],[115,180],[185,180]];
 			}
 			for(var i=0; i<num; i++){
@@ -156,14 +154,6 @@ function main(config){
 		//////////////////////////////////
 
 		// Which voting system?
-		var votingSystems = [
-			{name:"FPTP", voter:PluralityVoter, election:Election.plurality, margin:4},
-			{name:"IRV", voter:RankedVoter, election:Election.irv},
-			{name:"Borda", voter:RankedVoter, election:Election.borda, margin:4},
-			{name:"Condorcet", voter:RankedVoter, election:Election.condorcet},
-			{name:"Approval", voter:ApprovalVoter, election:Election.approval, margin:4},
-			{name:"Score", voter:ScoreVoter, election:Election.score}
-		];
 		var onChooseSystem = function(data){
 
 			// update config...
@@ -178,6 +168,14 @@ function main(config){
 			model.update();
 
 		};
+
+
+		const votingSystems = Object.keys(systems).map(function (s) {
+            const obj = systems[s];
+            obj.name = s;
+            return obj;
+        });
+
 		window.chooseSystem = new ButtonGroup({
 			label: "Cистема",
 			width: 108,
@@ -193,9 +191,9 @@ function main(config){
 		if(initialConfig.features>=2){ // CANDIDATES as feature.
 
 			var voters = [
-				{name:"one", num:1, margin:5},
-				{name:"two", num:2, margin:5},
-				{name:"three", num:3}
+				{name:"one", label: 'одна', num:1, buttonMargin:5},
+				{name:"two", label: 'две', num:2, buttonMargin:5},
+				{name:"three", label: 'три', num:3}
 			];
 			var onChooseVoters = function(data){
 
@@ -225,10 +223,10 @@ function main(config){
 		if(initialConfig.features>=3){ // VOTERS as feature.
 
 			var candidates = [
-				{name:"two", num:2, margin:4},
-				{name:"three", num:3, margin:4},
-				{name:"four", num:4, margin:4},
-				{name:"five", num:5}
+				{name:"two", label: '2', num:2, buttonMargin:4},
+				{name:"three", label: '3', num:3, buttonMargin:4},
+				{name:"four", label: '4', num:4, buttonMargin:4},
+				{name:"five", label: '5', num:5}
 			];
 			var onChooseCandidates = function(data){
 

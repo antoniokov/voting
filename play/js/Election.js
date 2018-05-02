@@ -40,7 +40,7 @@ Election.score = function(model, options){
 		text += _icon(winner)+" получил самую высокую оценку, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
-		text += "побеждает "+ "<b style='color:"+color+"'>"+translate(winner) + "</b>";
+		text += "побеждает "+ "<b style='color:"+color+"'>"+candidates[winner].label + "</b>";
 		model.caption.innerHTML = text;
 
 	}
@@ -78,7 +78,7 @@ Election.approval = function(model, options){
 		text += _icon(winner)+" подходит наибольшему числу избирателей, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
-		text += "побеждает "+ "<b style='color:"+color+"'>"+translate(winner) + "</b>";
+		text += "побеждает "+ "<b style='color:"+color+"'>"+ candidates[winner].label + "</b>";
 		model.caption.innerHTML = text;
 
 	}
@@ -148,7 +148,7 @@ Election.condorcet = function(model, options){
 		text += _icon(topWinner)+" одолел остальных в схватках один-на-один, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
-		text += "побеждает " + "<b style='color:"+color+"'>"+translate(topWinner)+"</b>";
+		text += "побеждает " + "<b style='color:"+color+"'>"+ candidates[topWinner].label +"</b>";
 	}else{
 		model.canvas.style.borderColor = "#000"; // BLACK.
 		text += "НИКТО не победил в &laquo;микровыборах&raquo;.<br>";
@@ -197,7 +197,7 @@ Election.borda = function(model, options){
 		text += _icon(winner)+" набрал <i>меньше</i> всех, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
-		text += "побеждает "+ "<b style='color:"+color+"'>"+translate(winner) + "</b>";
+		text += "побеждает "+ "<b style='color:"+color+"'>"+ candidates[winner].label + "</b>";
 		model.caption.innerHTML = text;
 
 	}
@@ -212,9 +212,9 @@ Election.irv = function(model, options){
 	var finalWinner = null;
 	var roundNum = 1;
 
-	var candidates = [];
+	var candidatesIRV = [];
 	for(var i=0; i<model.candidates.length; i++){
-		candidates.push(model.candidates[i].id);
+		candidatesIRV.push(model.candidates[i].id);
 	}
 
 	while(!finalWinner){
@@ -230,16 +230,16 @@ Election.irv = function(model, options){
 
 		// ONLY tally the remaining candidates...
 		var tally = {};
-		for(var i=0; i<candidates.length; i++){
-			var cID = candidates[i];
+		for(var i=0; i<candidatesIRV.length; i++){
+			var cID = candidatesIRV[i];
 			tally[cID] = pre_tally[cID];
 		}
 
 		// Say 'em...
-		for(var i=0; i<candidates.length; i++){
-			var c = candidates[i];
+		for(var i=0; i<candidatesIRV.length; i++){
+			var c = candidatesIRV[i];
 			text += _icon(c)+" "+tally[c];
-			if(i<candidates.length-1) text+=", ";
+			if(i<candidatesIRV.length-1) text+=", ";
 		}
 		text += "<br>";
 
@@ -258,7 +258,7 @@ Election.irv = function(model, options){
 		text += _icon(loser)+" выбывает.<br><br>";
 
 		// ACTUALLY ELIMINATE
-		candidates.splice(candidates.indexOf(loser), 1); // remove from candidates...
+		candidatesIRV.splice(candidatesIRV.indexOf(loser), 1); // remove from candidates...
 		var ballots = model.getBallots();
 		for(var i=0; i<ballots.length; i++){
 			var rank = ballots[i].rank;
@@ -267,14 +267,14 @@ Election.irv = function(model, options){
 
 		// And repeat!
 		roundNum++;
-	
+
 	}
 
 	// END!
 	var color = _colorWinner(model, finalWinner);
 	text += "</span>";
 	text += "<br>";
-	text += "побеждает "+ "<b style='color:"+color+"'>"+translate(winner) + "</b>";
+	text += "побеждает "+ "<b style='color:"+color+"'>"+ candidates[winner].label + "</b>";
 	model.caption.innerHTML = text;
 
 
@@ -303,7 +303,7 @@ Election.plurality = function(model, options){
 			text += _icon(c)+" "+tally[c];
             if(i<model.candidates.length-1) text+=", ";
 		}else{
-			text += translate(c)+": "+tally[c];
+			text += candidates[c].label + ": " + tally[c];
 			if(i<model.candidates.length-1) text+=", ";
 		}
 	}
@@ -313,7 +313,7 @@ Election.plurality = function(model, options){
 	}
 	text += "</span>";
 	text += "<br>";
-	text += "побеждает "+ "<b style='color:"+color+"'>"+translate(winner) + "</b>";
+	text += "побеждает "+ "<b style='color:"+color+"'>"+ candidates[winner].label + "</b>";
 	model.caption.innerHTML = text;
 
 };
