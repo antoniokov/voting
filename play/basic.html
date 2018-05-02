@@ -3,57 +3,56 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/model.css">
-
-<script src="js/Text.js"></script>
-<script src="js/helpers.js"></script>
-<script src="js/metadata/candidates.js"></script>
-<script src="js/minpubsub.js"></script>
-<script src="js/Loader.js"></script>
-<script src="js/Mouse.js"></script>
-<script src="js/Draggable.js"></script>
-<script src="js/Model.js"></script>
-<script src="js/Candidate.js"></script>
-<script src="js/Voters.js"></script>
-<script src="js/Election.js"></script>
-<script src="js/metadata/systems.js"></script>
-
-<script>
-
-Loader.load([
-	"img/voter_face.png",
-	"img/square.png",
-	"img/triangle.png",
-	"img/bob.png"
-]);
-
-Loader.onload = function(){
-
-	// SELF CONTAINED MODEL
-	window.model = new Model({border:2});
-	document.body.appendChild(model.dom);
-	model.onInit = function(){
-		model.addVoters({
-			dist: SingleVoter,
-			type: PluralityVoter,
-			x:125, y:180
-		});
-        model.addCandidate("square", 50, 200);
-        model.addCandidate("triangle", 250, 200);
-        model.addCandidate("bob", 150, 75);
-	};
-	model.onUpdate = function(){
-		var id = model.voters[0].ballot.vote;
-		var color = candidates[id].fill;
-		var text = "голос за <b style='color:"+color+"'>"+candidates[id].label+"</b>";
-		model.caption.innerHTML = text;
-	};
-
-	// Init!
-	model.init();
-
-};
-</script>
 </head>
 
-<body></body>
+<body>
+	<script src="js/helpers.js"></script>
+	<script src="js/metadata/candidates.js"></script>
+	<script src="js/minpubsub.js"></script>
+	<script src="js/Loader.js"></script>
+	<script src="js/Mouse.js"></script>
+	<script src="js/Draggable.js"></script>
+	<script src="js/Model.js"></script>
+	<script src="js/Candidate.js"></script>
+	<script src="js/Voters.js"></script>
+	<script src="js/Election.js"></script>
+	<script src="js/metadata/systems.js"></script>
+
+	<script>
+
+		Loader.onload = function(){
+
+			// SELF CONTAINED MODEL
+			window.model = new Model({border:2});
+			document.body.appendChild(model.dom);
+			model.onInit = function(){
+				model.addVoters({
+					dist: SingleVoter,
+					type: PluralityVoter,
+					x:125, y:180
+				});
+				model.addCandidate("square", 50, 200);
+				model.addCandidate("triangle", 250, 200);
+				model.addCandidate("bob", 150, 75);
+			};
+			model.onUpdate = function(){
+				var id = model.voters[0].ballot.vote;
+				var color = candidates[id].fill;
+				var text = "голос за <b style='color:"+color+"'>"+candidates[id].label+"</b>";
+				model.caption.innerHTML = text;
+			};
+
+			// Init!
+			model.init();
+
+		};
+
+		Loader.load([
+			"img/voter_face.png",
+			"img/square.png",
+			"img/triangle.png",
+			"img/bob.png"
+		]);
+	</script>
+</body>
 </html>

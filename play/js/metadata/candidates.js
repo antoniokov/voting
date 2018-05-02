@@ -38,7 +38,7 @@ const candidates = {
     temple: {
         img: "img/temple.png",
         icon: "img/icon/temple.png",
-        label: 'кинотеатр',
+        label: 'храм',
         fill: "hsl(240,80%,70%)"
     }
 };

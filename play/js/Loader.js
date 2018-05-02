@@ -1,9 +1,12 @@
 window.Loader = {};
 Loader.load = function(imagePaths){
+	if (!imagePaths.length) {
+		Loader.onload();
+	}
 
 	// When all images loaded, call dat callback
 	var assetsToLoad = imagePaths.length;
-	var _onAssetLoad = function(){
+	var _onAssetLoad = function() {
 		assetsToLoad--;
 		if(assetsToLoad === 0){
 			Loader.onload();

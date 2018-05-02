@@ -32,8 +32,7 @@ function main(config){
 		config = {
 			features: 4,
 			system: data.s,
-			candidates: data.c.length,
-			candidatePositions: data.c,
+			candidates: data.c,
 			voters: data.v.length,
 			voterPositions: data.v,
 			description: data.d
@@ -44,7 +43,7 @@ function main(config){
 	// Defaults...
 	config = config || {};
 	config.system = config.system || "FPTP";
-	config.candidates = config.candidates || 3;
+	config.candidates = config.candidates|| metadataToArray(candidates).slice(0, 2);
 	config.voters = config.voters || 1;
 	config.features = config.features || 1; // 1-basic, 2-voters, 3-candidates, 4-save
 	var initialConfig = JSON.parse(JSON.stringify(config));
@@ -65,7 +64,7 @@ function main(config){
 		model.onInit = function(){
 
 			// Based on config... what should be what?
-			model.numOfCandidates = config.candidates;
+			model.numOfCandidates = config.candidates.length;
 			model.numOfVoters = config.voters;
 			model.system = config.system;
 			var votingSystem = systems[model.system];
@@ -73,42 +72,38 @@ function main(config){
 			model.election = votingSystem.election;
 
 			// Voters
-			var num = model.numOfVoters;
-			var voterPositions;
-			if(num===1){
-				voterPositions = [[150,150]];
-			}else if(num===2){
-				voterPositions = [[150,100],[150,200]];
-			}else if(num===3){
-				voterPositions = [[150,115],[115,180],[185,180]];
-			}
-			for(var i=0; i<num; i++){
-				var pos = voterPositions[i];
-				model.addVoters({
-					dist: GaussianVoters,
-					type: model.voterType,
-					num:(4-num),
-					x:pos[0], y:pos[1]
-				});
-			}
+			const defaultVoterPositions = {
+				1: [[150,150]],
+				2: [[150,100],[150,200]],
+				3: [[150,115],[115,180],[185,180]]
+			};
+			const voterPositions = defaultVoterPositions[model.numOfVoters];
+
+            voterPositions.forEach(function (p) {
+                model.addVoters({
+                    dist: GaussianVoters,
+                    type: model.voterType,
+                    num:(4 - model.numOfVoters),
+                    x: p[0], y: p[1]
+                });
+			});
 
 			// Candidates, in a circle around the center.
-			var _candidateIDs = ["square","triangle","bob","hexagon","pentagon"];
-			var angle = 0;
-			var num = model.numOfCandidates;
-			switch(num){
-				case 3: angle=Math.TAU/12; break;
-				case 4: angle=Math.TAU/8; break;
-				case 5: angle=Math.TAU/6.6; break;
-			}
-			for(var i=0; i<num; i++){
-				var r = 100;
-				var x = 150 - r*Math.cos(angle);
-				var y = 150 - r*Math.sin(angle);
-				var id = _candidateIDs[i];
-				model.addCandidate(id, x, y);
-				angle += Math.TAU/num;
-			}
+			const startingAngles = {
+				2: 0,
+                3: Math.TAU/12,
+                4: Math.TAU/8,
+                5: Math.TAU/6.6
+			};
+
+			var startingAngle = startingAngles[model.numOfCandidates];
+			config.candidates.forEach(function (c, i) {
+                const r = 100;
+                const angle = startingAngle + i*Math.TAU/model.numOfCandidates;
+                const x = 150 - r*Math.cos(angle);
+                const y = 150 - r*Math.sin(angle);
+                model.addCandidate(c.id, x, y);
+			});
 
 		};
 		model.election = Election.plurality;
@@ -119,33 +114,28 @@ function main(config){
 		// In Position!
 		var setInPosition = function(){
 
-			var positions;
-			
-			// CANDIDATE POSITIONS
-			positions = config.candidatePositions;
-			if(positions){
-				for(var i=0; i<positions.length; i++){
-					var position = positions[i];
-					var candidate = model.candidates[i];
-					candidate.x = position[0];
-					candidate.y = position[1];
+			model.candidates.forEach(function (c) {
+				const position = config.candidates.filter(function (cc) {
+					return c.id === cc.id;
+				})[0].position;
+
+				if (position) {
+                    c.x = position[0];
+                    c.y = position[1];
 				}
-			}
+			});
 
 			// VOTER POSITION
-			positions = config.voterPositions;
-			if(positions){
-				for(var i=0; i<positions.length; i++){
-					var position = positions[i];
-					var voter = model.voters[i];
-					voter.x = position[0];
-					voter.y = position[1];
-				}
+			if (config.voterPositions) {
+                config.voterPositions.forEach(function (p, i) {
+                	const voter = model.voters[i];
+                    voter.x = p[0];
+                    voter.y = p[1];
+				});
 			}
 
 			// update!
 			model.update();
-
 		};
 
 
@@ -157,7 +147,7 @@ function main(config){
 		var onChooseSystem = function(data){
 
 			// update config...
-			config.system = data.name;
+			config.system = data.id;
 
 			// no reset...
 			model.voterType = data.voter;
@@ -170,16 +160,10 @@ function main(config){
 		};
 
 
-		const votingSystems = Object.keys(systems).map(function (s) {
-            const obj = systems[s];
-            obj.name = s;
-            return obj;
-        });
-
 		window.chooseSystem = new ButtonGroup({
 			label: "Cистема",
 			width: 108,
-			data: votingSystems,
+			data: metadataToArray(systems),
 			onChoose: onChooseSystem
 		});
 
@@ -262,7 +246,7 @@ function main(config){
 
 		// Select the UI!
 		var selectUI = function(){
-			if(window.chooseSystem) chooseSystem.highlight("name", model.system);
+			if(window.chooseSystem) chooseSystem.highlight("id", model.system);
 			if(window.chooseCandidates) chooseCandidates.highlight("num", model.numOfCandidates);
 			if(window.chooseVoters) chooseVoters.highlight("num", model.numOfVoters);
 		};
@@ -388,14 +372,11 @@ function main(config){
 
 	};
 
-	Loader.load([
-		"img/voter_face.png",
-		"img/square.png",
-		"img/triangle.png",
-		"img/hexagon.png",
-		"img/pentagon.png",
-		"img/bob.png"
-	]);
+	const candidateImages = config.candidates.map(function (c) {
+		return candidates[c.id].img;
+	});
+
+	Loader.load(candidateImages.concat("img/voter_face.png"));
 
 	// SAVE & PARSE
 	// ?m={s:[system], v:[voterPositions], c:[candidatePositions], d:[description]}
