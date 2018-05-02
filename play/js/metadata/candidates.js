@@ -40,5 +40,23 @@ const candidates = {
         icon: "img/icon/temple.png",
         label: 'храм',
         fill: "hsl(240,80%,70%)"
+    },
+    pool: {
+        img: "img/pool.png",
+        icon: "img/icon/pool.png",
+        label: 'бассейн',
+        fill: "hsl(0,80%,70%)"
+    },
+    gym: {
+        img: "img/gym.png",
+        icon: "img/icon/gym.png",
+        label: 'тренажёрка',
+        fill: "hsl(240,80%,70%)"
+    },
+    library: {
+        img: "img/library.png",
+        icon: "img/icon/library.png",
+        label: 'библиотека',
+        fill: "hsl(45,80%,70%)"
     }
 };
