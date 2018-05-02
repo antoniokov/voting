@@ -2,6 +2,6 @@
 Math.TAU = Math.PI*2;
 
 // For the election sandbox code
-function _icon(name){
-	return "<img src='img/icon/"+name+".png'/>";
+function _icon(candidate){
+	return "<img src='" + candidates[candidate].icon + "'/>";
 }
