@@ -20,7 +20,7 @@
 	clear: both;
 	overflow: hidden;
 	width: 800px;
-	height: 135px;
+	height: 120px;
 	margin-bottom: 15px;
 }
 textarea, input{
@@ -33,7 +33,7 @@ textarea, input{
 }
 #description_container textarea{
     width: 778px;
-    height: 112px;
+    height: 97px;
     padding: 10px;
     font-size: 16px;
 }

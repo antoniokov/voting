@@ -219,7 +219,7 @@ function main(config){
 			var onChooseCandidates = function(data){
 
 				// update config...
-				config.candidates = data.num;
+				config.candidates = initialConfig.candidates.slice(0, data.num);
 
 				// save voters before switching!
 				config.voterPositions = save().voterPositions;
