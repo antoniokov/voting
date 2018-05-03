@@ -361,7 +361,7 @@ function main(config){
 			// The share link textbox
 			linkText = document.createElement("input");
 			linkText.id = "savelink";
-			linkText.placeholder = "[when you save your model, a link you can copy will show up here]";
+			linkText.placeholder = "[сохраните — и здесь появится ссылка на вашу модель]";
 			linkText.setAttribute("readonly", true);
 			linkText.onclick = function(){
 				linkText.select();
