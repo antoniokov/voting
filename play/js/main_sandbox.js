@@ -160,10 +160,14 @@ function main(config){
 		};
 
 
+		const votingSystems = config.systemsAvailable
+			? metadataToArray(systems).filter(function (s) { return config.systemsAvailable.indexOf(s.id) >= 0 })
+			: metadataToArray(systems);
+
 		window.chooseSystem = new ButtonGroup({
 			label: "Cистема",
 			width: 108,
-			data: metadataToArray(systems),
+			data: votingSystems,
 			onChoose: onChooseSystem
 		});
 
