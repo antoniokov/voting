@@ -297,16 +297,31 @@ Election.plurality = function(model, options){
 	if(options.sidebar){
 		text += "<b>У кого больше голосов?</b><br>";
 	}
-	for(var i=0; i<model.candidates.length; i++){
-		var c = model.candidates[i].id;
-		if(options.sidebar){
-			text += _icon(c)+" "+tally[c];
-            if(i<model.candidates.length-1) text+=", ";
-		}else{
-			text += candidates[c].label + ": " + tally[c];
-			if(i<model.candidates.length-1) text+=", ";
+
+    const sortedTally = Object.keys(tally).map(function (c) {
+        return {
+            id: c,
+            result: tally[c]
+        };
+    }).sort(function (a, b) {
+        return b.result - a.result;
+    });
+
+    sortedTally.forEach(function (st, i) {
+    	if (options.sidebar) {
+            text += _icon(st.id)+ " " + st.result;
+            if (i < sortedTally.length - 1) {
+                text+=", ";
+            }
+		} else {
+            text += candidates[st.id].label + ": " + st.result;
+            if(i < sortedTally.length - 1) {
+                text+=", ";
+			}
 		}
-	}
+
+    });
+
 	if(options.sidebar){
 		text += "<br><br>";
 		text += "У " + _icon(winner)+" больше всего голосов, поэтому...<br>";
