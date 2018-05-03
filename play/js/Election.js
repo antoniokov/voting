@@ -32,11 +32,13 @@ Election.score = function(model, options){
 		var text = "";
 		text += "<span class='small'>";
 		text += "<b>У кого оценка выше?</b><br>";
-		for(var i=0; i<model.candidates.length; i++){
-			var c = model.candidates[i].id;
-			text += _icon(c)+ ": "+ (tally[c].toFixed(2)) + " из 5.00<br>";
-		}
+
+		const sortedTally = _getSortedTally(tally);
+        sortedTally.forEach(function (st) {
+            text += _icon(st.id)+ ": "+ (st.result.toFixed(2)) + "<br>";
+		});
 		text += "<br>";
+
 		text += _icon(winner)+" получил самую высокую оценку, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
@@ -69,12 +71,11 @@ Election.approval = function(model, options){
 		var text = "";
 		text += "<span class='small'>";
 		text += "<b>У кого больше одобрений?</b><br>";
-		for(var i=0; i<model.candidates.length; i++){
-			var c = model.candidates[i].id;
-			text += _icon(c)+" "+tally[c];
-            if(i<model.candidates.length-1) text+=", ";
-		}
+
+		const sortedTally = _getSortedTally(tally);
+		text = _printSortedTally(sortedTally, text);
 		text += "<br><br>";
+
 		text += _icon(winner)+" подходит наибольшему числу избирателей, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
@@ -188,12 +189,11 @@ Election.borda = function(model, options){
 		var text = "";
 		text += "<span class='small'>";
 		text += "<b>У кого сумма позиций меньше?</b><br>";
-		for(var i=0; i<model.candidates.length; i++){
-			var c = model.candidates[i].id;
-			text += _icon(c)+" "+tally[c];
-            if(i<model.candidates.length-1) text+=", ";
-		}
+
+		const sortedTally = _getSortedTally(tally, function (a, b) { return a.result - b.result });
+		text = _printSortedTally(sortedTally, text);
 		text += "<br><br>";
+
 		text += _icon(winner)+" набрал <i>меньше</i> всех, поэтому...<br>";
 		text += "</span>";
 		text += "<br>";
@@ -236,11 +236,8 @@ Election.irv = function(model, options){
 		}
 
 		// Say 'em...
-		for(var i=0; i<candidatesIRV.length; i++){
-			var c = candidatesIRV[i];
-			text += _icon(c)+" "+tally[c];
-			if(i<candidatesIRV.length-1) text+=", ";
-		}
+		const sortedTally = _getSortedTally(tally);
+		text = _printSortedTally(sortedTally, text);
 		text += "<br>";
 
 		// Do they have more than 50%?
@@ -298,29 +295,17 @@ Election.plurality = function(model, options){
 		text += "<b>У кого больше голосов?</b><br>";
 	}
 
-    const sortedTally = Object.keys(tally).map(function (c) {
-        return {
-            id: c,
-            result: tally[c]
-        };
-    }).sort(function (a, b) {
-        return b.result - a.result;
-    });
-
-    sortedTally.forEach(function (st, i) {
-    	if (options.sidebar) {
-            text += _icon(st.id)+ " " + st.result;
-            if (i < sortedTally.length - 1) {
-                text+=", ";
-            }
-		} else {
+    const sortedTally = _getSortedTally(tally);
+	if (options.sidebar) {
+		text = _printSortedTally(sortedTally, text);
+	} else {
+        sortedTally.forEach(function (st, i) {
             text += candidates[st.id].label + ": " + st.result;
             if(i < sortedTally.length - 1) {
                 text+=", ";
-			}
-		}
-
-    });
+            }
+        });
+	}
 
 	if(options.sidebar){
 		text += "<br><br>";
@@ -393,3 +378,27 @@ var _colorWinner = function(model, winner){
 	model.canvas.style.borderColor = color;
 	return color;
 }
+
+const _getSortedTally = function (tally, compareFunction) {
+	const compare = compareFunction || function (a, b) { return b.result - a.result; };
+
+    return Object.keys(tally).map(function (c) {
+        return {
+            id: c,
+            result: tally[c]
+        };
+    }).sort(compare);
+};
+
+const _printSortedTally = function (sortedTally, preText) {
+	var text = preText || '';
+
+    sortedTally.forEach(function (st, i) {
+        text += _icon(st.id)+ " " + st.result;
+        if (i < sortedTally.length - 1) {
+            text+=", ";
+        }
+	});
+
+	return text;
+};
