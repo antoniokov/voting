@@ -69,3 +69,28 @@ footer {
 .cheatsheet h2 {
     margin-top: 15px;
 }
+
+.candidate {
+    font-weight: 600;
+}
+
+.candidate.triangle, .candidate.cinema, .candidate.library {
+    color: #FFDD55;
+}
+
+.candidate.square, .candidate.temple, .candidate.gym {
+    color: #557DFF
+}
+
+.candidate.bob, .candidate.pool {
+    color: #D54E55
+}
+
+.candidate.trump {
+    color: hsl(30,80%,70%)
+}
+
+.candidate-icon {
+    height: 16px;
+    margin-bottom: -3px;
+}

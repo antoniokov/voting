@@ -219,7 +219,7 @@ Election.irv = function(model, options){
 
 	while(!finalWinner){
 
-		text += "<b>Круг "+roundNum+"</b><br>";
+		text += "<b>Раунд "+roundNum+"</b><br>";
 		text += "Кто первый в бюллетене?<br>";
 
 		// Tally the approvals & get winner!
