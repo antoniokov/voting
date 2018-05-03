@@ -5,6 +5,12 @@ const candidates = {
         label: "квадрат",
         fill: "hsl(240,80%,70%)"
     },
+    bob: {
+        img: "img/bob.png",
+        icon: "img/icon/bob.png",
+        label: "круг",
+        fill: "hsl(0,80%,70%)"
+    },
     triangle: {
         img: "img/triangle.png",
         icon: "img/icon/triangle.png",
@@ -22,12 +28,6 @@ const candidates = {
         icon: "img/icon/pentagon.png",
         label: "пятиугольник",
         fill: "hsl(90,80%,70%)"
-    },
-    bob: {
-        img: "img/bob.png",
-        icon: "img/icon/bob.png",
-        label: "круг",
-        fill: "hsl(0,80%,70%)"
     },
     cinema: {
         img: "img/cinema.png",

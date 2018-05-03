@@ -189,7 +189,7 @@ function main(config){
 				config.voters = data.num;
 
 				// save candidates before switching!
-				config.candidatePositions = save().candidatePositions;
+				config.candidates = save().candidates;
 
 				// reset!
 				config.voterPositions = null;
@@ -209,31 +209,33 @@ function main(config){
 
 		// How many candidates?
 		if(initialConfig.features>=3){ // VOTERS as feature.
-
-			var candidates = [
-				{name:"two", label: '2', num:2, buttonMargin:4},
-				{name:"three", label: '3', num:3, buttonMargin:4},
-				{name:"four", label: '4', num:4, buttonMargin:4},
-				{name:"five", label: '5', num:5}
-			];
 			var onChooseCandidates = function(data){
 
 				// update config...
-				config.candidates = initialConfig.candidates.slice(0, data.num);
+				config.candidates = data.num <= initialConfig.candidates.length
+					? initialConfig.candidates.slice(0, data.num)
+					: metadataToArray(candidates).slice(0, data.num);
 
 				// save voters before switching!
 				config.voterPositions = save().voterPositions;
 
 				// reset!
-				config.candidatePositions = null;
 				model.reset();
 				setInPosition();
 
 			};
+
+            const candidatesCount = [
+                {name:"two", label: '2', num:2, buttonMargin:4},
+                {name:"three", label: '3', num:3, buttonMargin:4},
+                {name:"four", label: '4', num:4, buttonMargin:4},
+                {name:"five", label: '5', num:5}
+            ];
+
 			window.chooseCandidates = new ButtonGroup({
 				label: "Кандидатов",
 				width: 52,
-				data: candidates,
+				data: candidatesCount,
 				onChoose: onChooseCandidates
 			});
 			document.querySelector("#left").appendChild(chooseCandidates.dom);
@@ -289,34 +291,23 @@ function main(config){
 		///////////////////////////
 
 		window.save = function(log){
+			const candidates = model.candidates.map(function (c) {
+				return {
+					id: c.id,
+					position: [Math.round(c.x), Math.round(c.y)]
+				}
+			});
 
-			// Candidate positions
-			var positions = [];
-			for(var i=0; i<model.candidates.length; i++){
-				var candidate = model.candidates[i];
-				positions.push([
-					Math.round(candidate.x),
-					Math.round(candidate.y)
-				]);
-			}
-			if(log) console.log("candidatePositions: "+JSON.stringify(positions));
-			var candidatePositions = positions;
+			if(log) console.log("candidates: " + JSON.stringify(candidates));
 
-			// Voter positions
-			positions = [];
-			for(var i=0; i<model.voters.length; i++){
-				var voter = model.voters[i];
-				positions.push([
-					Math.round(voter.x),
-					Math.round(voter.y)
-				]);
-			}
-			if(log) console.log("voterPositions: "+JSON.stringify(positions));
-			var voterPositions = positions;
+			const voterPositions = model.voters.map(function (v) {
+				return [v.x, v.y];
+			});
 
-			// positions!
+			if(log) console.log("voterPositions: "+JSON.stringify(voterPositions));
+
 			return {
-				candidatePositions: candidatePositions,
+				candidates: candidates,
 				voterPositions: voterPositions
 			};
 
@@ -354,7 +345,7 @@ function main(config){
 			saveDOM.style.top = "470px";
 			saveDOM.style.left = "115px";
 			saveDOM.onclick = function(){
-				_saveModel();
+				_saveModel(false);
 			};
 			document.body.appendChild(saveDOM);
 
@@ -369,7 +360,7 @@ function main(config){
 			document.body.appendChild(linkText);
 
 			// Create a URL... (later, PARSE!)
-			// save... ?d={s:[system], v:[voterPositions], c:[candidatePositions], d:[description]}
+			// save... ?d={s:[system], v:[voterPositions], c:[candidates], d:[description]}
 
 		}
 		
@@ -383,25 +374,25 @@ function main(config){
 	Loader.load(candidateImages.concat("img/voter_face.png"));
 
 	// SAVE & PARSE
-	// ?m={s:[system], v:[voterPositions], c:[candidatePositions], d:[description]}
-	var _saveModel = function(){
+	// ?m={s:[system], v:[voterPositions], c:[candidates], d:[description]}
+	var _saveModel = function(log){
 
 		// Data!
 		var data = {};
 
 		// System?
 		data.s = config.system;
-		console.log("voting system: "+data.s);
+		if (log) console.log("voting system: " + data.s);
 
 		// Positions...
-		var positions = save(true);
+		const positions = save(false);
 		data.v = positions.voterPositions;
-		data.c = positions.candidatePositions; 
+		data.c = positions.candidates;
 
 		// Description
 		var description = document.getElementById("description_text");
 		data.d = description.value;
-		console.log("description: "+data.d);
+        if (log) console.log("description: "+data.d);
 
 		// URI ENCODE!
 		var uri = encodeURIComponent(JSON.stringify(data));
@@ -410,8 +401,7 @@ function main(config){
 		initialConfig = {
 			features: 4,
 			system: data.s,
-			candidates: data.c.length,
-			candidatePositions: data.c,
+			candidates: data.c,
 			voters: data.v.length,
 			voterPositions: data.v
 		};
