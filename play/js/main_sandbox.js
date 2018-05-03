@@ -352,7 +352,7 @@ function main(config){
 			saveDOM.id = "save";
 			saveDOM.innerHTML = "сохранить";
 			saveDOM.style.top = "470px";
-			saveDOM.style.left = "120px";
+			saveDOM.style.left = "115px";
 			saveDOM.onclick = function(){
 				_saveModel();
 			};
@@ -419,7 +419,7 @@ function main(config){
 		// Put it in the save link box!
 		var link = "http://antoniokov.github.io/voting/sandbox?m="+uri;
 		var savelink = document.getElementById("savelink");
-		savelink.value = "saving...";
+		savelink.value = "сохраняем...";
 		setTimeout(function(){
 			savelink.value = link;
 		},750);

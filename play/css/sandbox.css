@@ -1,19 +1,33 @@
 #reset, #save{
-    background: #fff;
-    color: #888;
-    border: 1px solid #888;
+    cursor: pointer;
+    background: #aaa;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    width: 105px;
+    height: 30px;
+    letter-spacing: 1px;
+    padding: 2px 0;
+    border-radius: 5px;
+    border-bottom: 2px solid #888;
+    position: absolute;
+    margin-top:0px;
+
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
 }
 #reset:hover, #save:hover{
-	margin-top:0px;
-	background: #fff;
-	color: #bbb;
-	border-color: #bbb;
-	border-bottom-color: #888;
+    margin-top:-2px;
+    background: #bbb;
+    border-bottom-color: #999;
 }
 #reset:active, #save:active{
-	margin-top:0px;
-	background: #fff;
-	border-bottom-color: #888;
+    margin-top:2px;
+    background: #999;
+    border-bottom-color: #777;
 }
 
 #description_container{
