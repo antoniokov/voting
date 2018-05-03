@@ -252,7 +252,7 @@ Election.irv = function(model, options){
 		// Otherwise... runoff...
 		var loser = _countLoser(tally);
 		text += "никто не набрал 50%<br>";
-		text += _icon(loser)+" выбывает.<br><br>";
+		text += _icon(loser)+" выбывает<br><br>";
 
 		// ACTUALLY ELIMINATE
 		candidatesIRV.splice(candidatesIRV.indexOf(loser), 1); // remove from candidates...
