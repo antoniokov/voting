@@ -421,8 +421,13 @@ function SingleVoter(config){
 	self.type = new config.type(self.model);
 
 	// Image!
-	self.img = new Image();
-	self.img.src = "img/voter_face.png";
+	if (preloadedImages["img/voter_face.png"]) {
+		self.img = preloadedImages["img/voter_face.png"];
+	} else {
+        self.img = new Image();
+        self.img.src = "img/voter_face.png";
+	}
+
 
 	// UPDATE!
 	self.ballot = null;

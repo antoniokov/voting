@@ -333,21 +333,5 @@
         </footer>
 
     </article>
-
-    <script>
-        //Temporary solution for the concurrency issue
-        const updateDelays = [100, 300, 1000, 5000];
-        const iframes = document.getElementsByClassName("play-frame");
-
-        updateDelays.forEach(function (d) {
-            setTimeout(function () {
-                Array.prototype.forEach.call(iframes, function(f) {
-                    if (f.contentWindow.model) {
-                        f.contentWindow.model.update();
-                    }
-                });
-            }, d);
-        });
-    </script>
 </body>
 </html>

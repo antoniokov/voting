@@ -10,8 +10,13 @@ function Candidate(config){
 	// GRAPHICS
 	var _graphics = candidates[self.id];
 	self.fill = _graphics.fill;
-	self.img = new Image();
-	self.img.src = _graphics.img;
+
+	if (preloadedImages[_graphics.img]) {
+        self.img = preloadedImages[_graphics.img];
+	} else {
+        self.img = new Image();
+        self.img.src = _graphics.img;
+	}
 
 	self.draw = function(ctx){
 

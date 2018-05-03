@@ -1,23 +1,31 @@
 window.Loader = {};
+const preloadedImages = {};
+
 Loader.load = function(imagePaths){
 	if (!imagePaths.length) {
 		Loader.onload();
 	}
 
-	// When all images loaded, call dat callback
-	var assetsToLoad = imagePaths.length;
-	var _onAssetLoad = function() {
-		assetsToLoad--;
-		if(assetsToLoad === 0){
-			Loader.onload();
-		}
-	};
+    imagePaths.forEach(function (ip) {
+    	preloadedImages[ip] = null;
+	});
 
-	// Load 'em all
-	for(var i=0;i<imagePaths.length;i++){
-		var img = new Image();
-		img.onload = _onAssetLoad;
-		img.src = imagePaths[i];
-	}
+	const _onAssetLoad = function (ip, img) {
+		preloadedImages[ip] = img;
+
+		const allLoaded = Object.keys(preloadedImages).every(function (ip) {
+			return preloadedImages[ip] !== null;
+        });
+
+		if (allLoaded) {
+            Loader.onload();
+		}
+    };
+
+    imagePaths.forEach(function (ip) {
+        const img = new Image();
+        img.onload = function () { _onAssetLoad(ip, img) };
+        img.src = ip;
+	});
 
 };
