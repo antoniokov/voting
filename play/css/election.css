@@ -24,11 +24,11 @@ Election/Sandbox design:
 }
 #caption{
 	text-align: left;
-	font-size: 23px;
+	font-size: 20px;
 	line-height: 1.0em;
 }
 #caption .small{
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1.0em;
 }
 
@@ -44,7 +44,7 @@ Election/Sandbox design:
 }
 .button-group-label{
 	font-weight: bold;
-    font-size: 19px;
+    font-size: 15px;
     margin-bottom: 5px;
     line-height: 1.1em;
 }
@@ -53,7 +53,7 @@ Election/Sandbox design:
 	cursor: pointer;
     background: #bbb;
     color: #555;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 400;
     text-align: center;
     margin-bottom: 5px;

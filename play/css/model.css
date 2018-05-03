@@ -1,6 +1,6 @@
 body{
 	margin: 0px;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 	font-size: 25px;
 	line-height: 1.2em;
 	color:#333;
@@ -46,7 +46,6 @@ THE MAIN MODEL ITSELF
 }
 #caption{
 	cursor: default;
-	margin-top:10px;
 	text-align: center;
 }
 #caption .small{
@@ -61,7 +60,7 @@ DAT RESET BUTTON
 	cursor: pointer;
     background: #aaa;
     color: #fff;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 300;
     text-align: center;
     width: 100px;
