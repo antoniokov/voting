@@ -78,11 +78,11 @@ footer {
     color: #F0D175;
 }
 
-.candidate.square, .candidate.temple, .candidate.gym {
+.candidate.square, .candidate.temple, .candidate.pool {
     color: #557DFF
 }
 
-.candidate.bob, .candidate.pool {
+.candidate.bob, .candidate.gym {
     color: #D54E55
 }
 

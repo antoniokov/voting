@@ -45,13 +45,13 @@ const candidates = {
         img: "img/pool.png",
         icon: "img/icon/pool.png",
         label: 'бассейн',
-        fill: "hsl(0,80%,70%)"
+        fill: "hsl(240,80%,70%)"
     },
     gym: {
         img: "img/gym.png",
         icon: "img/icon/gym.png",
         label: 'тренажёрка',
-        fill: "hsl(240,80%,70%)"
+        fill: "hsl(0,80%,70%)"
     },
     library: {
         img: "img/library.png",

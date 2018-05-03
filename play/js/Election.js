@@ -309,7 +309,7 @@ Election.plurality = function(model, options){
 	}
 	if(options.sidebar){
 		text += "<br><br>";
-		text += _icon(winner)+" получил больше всего голосов, поэтому...<br>";
+		text += "У " + _icon(winner)+" больше всего голосов, поэтому...<br>";
 	}
 	text += "</span>";
 	text += "<br>";
