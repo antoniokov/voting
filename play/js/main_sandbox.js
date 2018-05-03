@@ -198,7 +198,7 @@ function main(config){
 
 			};
 			window.chooseVoters = new ButtonGroup({
-				label: "Сколько групп избирателей?",
+				label: "Групп избирателей",
 				width: 70,
 				data: voters,
 				onChoose: onChooseVoters
@@ -231,7 +231,7 @@ function main(config){
 
 			};
 			window.chooseCandidates = new ButtonGroup({
-				label: "Сколько кандидатов?",
+				label: "Кандидатов",
 				width: 52,
 				data: candidates,
 				onChoose: onChooseCandidates
@@ -417,7 +417,7 @@ function main(config){
 		};
 
 		// Put it in the save link box!
-		var link = "http://ncase.me/ballot/sandbox?m="+uri;
+		var link = "http://antoniokov.github.io/voting/sandbox?m="+uri;
 		var savelink = document.getElementById("savelink");
 		savelink.value = "saving...";
 		setTimeout(function(){

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<base href="../play/"/>
+	<link rel="stylesheet" type="text/css" href="css/model.css">
+	<link rel="stylesheet" type="text/css" href="css/election.css">
+	<link rel="stylesheet" type="text/css" href="css/sandbox.css">
+</head>
+<body>
+	<div id="left"></div>
+	<div id="center"></div>
+	<div id="right"></div>
+
+	<script src="js/helpers.js"></script>
+	<script src="js/metadata/candidates.js"></script>
+	<script src="js/minpubsub.js"></script>
+	<script src="js/Loader.js"></script>
+	<script src="js/Mouse.js"></script>
+	<script src="js/Draggable.js"></script>
+	<script src="js/Model.js"></script>
+	<script src="js/Candidate.js"></script>
+	<script src="js/Voters.js"></script>
+	<script src="js/Election.js"></script>
+	<script src="js/Buttons.js"></script>
+	<script src="js/metadata/systems.js"></script>
+
+	<script src="js/main_sandbox.js"></script>
+	<script>
+        main({
+            description: "Приведите ваши аргументы здесь.\n\nОдобрительная система плохо работает, когда...\nПодсчёт Кондорсе полезен, если...\nА вот ситуация, с которой не справляется ни одна система...",
+            features: 4,
+            system: "FPTP",
+            candidates: [{ id: "square" }, { id: "bob" }, { id: "triangle" }, { id: "hexagon" }, { id: "pentagon" }],
+            voters: 1
+        });
+	</script>
+</body>
+</html>

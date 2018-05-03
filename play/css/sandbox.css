@@ -20,18 +20,20 @@
 	clear: both;
 	overflow: hidden;
 	width: 800px;
-	height: 120px;
+	height: 135px;
 	margin-bottom: 15px;
 }
 textarea, input{
 	display: block;
     border: 1px solid #bbb;
     resize: none;
-    font-family: Arial, sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 22px;
 }
 #description_container textarea{
     width: 778px;
-    height: 97px;
+    height: 112px;
     padding: 10px;
     font-size: 16px;
 }
