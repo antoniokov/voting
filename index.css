@@ -40,7 +40,8 @@ iframe {
 
 
 footer {
-    border-top: black dotted 1px;
+    margin: 50px 0;
+    border-top: #F0EAD6 solid 1px;
     font-size: 15px;
 }
 
