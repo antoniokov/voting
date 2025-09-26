@@ -94,7 +94,7 @@ a:visited {
 }
 
 ol, ul {
-    color: var(--base-900);
+    color: var(--black);
 }
 
 iframe {
