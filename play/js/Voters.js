@@ -46,7 +46,7 @@ function ScoreVoter(model){
 			ctx.beginPath();
 			ctx.arc(x, y, (self.radiusStep*i)*2, 0, Math.TAU, false);
 			ctx.lineWidth = (5-i)*2;
-			ctx.strokeStyle = "#888";
+			ctx.strokeStyle = "#6F6E69"; // Flexoki base-600
 			ctx.stroke();
 		}
 
@@ -72,7 +72,7 @@ function ScoreVoter(model){
 		// Leftover is gray
 		slices.push({
 			num: leftover,
-			fill: "#bbb"
+			fill: "#B7B5AC" // Flexoki base-300
 		});
 		// FILL 'EM IN
 		_drawSlices(ctx, x, y, size, slices, totalSlices);
@@ -117,7 +117,7 @@ function ApprovalVoter(model){
 		ctx.beginPath();
 		ctx.arc(x, y, self.approvalRadius*2, 0, Math.TAU, false);
 		ctx.lineWidth = 8;
-		ctx.strokeStyle = "#888";
+		ctx.strokeStyle = "#6F6E69"; // Flexoki base-600
 		ctx.stroke();			
 
 	};
@@ -198,7 +198,7 @@ function RankedVoter(model){
 			ctx.moveTo(x,y);
 			ctx.lineTo(cx,cy);
 			ctx.lineWidth = lineWidth;
-			ctx.strokeStyle = "#888";
+			ctx.strokeStyle = "#6F6E69"; // Flexoki base-600
 			ctx.stroke();			
 
 		}		
@@ -264,7 +264,7 @@ function PluralityVoter(model){
 		ctx.moveTo(x,y);
 		ctx.lineTo(tx,ty);
 		ctx.lineWidth = 8;
-		ctx.strokeStyle = "#888";
+		ctx.strokeStyle = "#6F6E69"; // Flexoki base-600
 		ctx.stroke();
 
 	};
@@ -323,7 +323,7 @@ var _drawSlices = function(ctx, x, y, size, slices, totalSlices){
 
 };
 var _drawBlank = function(ctx, x, y, size){
-	var slices = [{ num:1, fill:"#bbb" }];
+	var slices = [{ num:1, fill:"#B7B5AC" }]; // Flexoki base-300
 	_drawSlices(ctx, x, y, size, slices, 1);
 };
 

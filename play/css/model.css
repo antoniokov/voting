@@ -1,9 +1,47 @@
+/* Flexoki Color Variables */
+:root {
+    /* Base colors */
+    --paper: #FFFCF0;
+    --base-50: #F2F0E5;
+    --base-100: #E6E4D9;
+    --base-150: #DAD8CE;
+    --base-200: #CECCC3;
+    --base-300: #B7B5AC;
+    --base-400: #9F9D94;
+    --base-500: #878580;
+    --base-600: #6F6E69;
+    --base-700: #575653;
+    --base-800: #403E3C;
+    --base-900: #282726;
+    --base-950: #1C1B1A;
+    --black: #100F0F;
+    
+    /* Accent colors */
+    --red-600: #AF3029;
+    --red-400: #D14D41;
+    --orange-600: #BC5215;
+    --orange-400: #DA702C;
+    --yellow-600: #AD8301;
+    --yellow-400: #D0A215;
+    --green-600: #66800B;
+    --green-400: #879A39;
+    --cyan-600: #24837B;
+    --cyan-400: #3AA99F;
+    --blue-600: #205EA6;
+    --blue-400: #4385BE;
+    --purple-600: #5E409D;
+    --purple-400: #8B7EC8;
+    --magenta-600: #A02F6F;
+    --magenta-400: #CE5D97;
+}
+
 body{
 	margin: 0px;
-	font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 	font-size: 25px;
 	line-height: 1.2em;
-	color:#333;
+	color: var(--base-900);
+	background-color: var(--paper);
 
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -32,7 +70,7 @@ THE MAIN MODEL ITSELF
 .model .interactive{
     background-image: url(../img/axis.png);
     background-size: 100% 100%;
-    border: 2px solid #ccc;
+    border: 2px solid var(--base-300);
 }
 .model .interactive[cursor=grab]{
 	cursor: -webkit-grab;
@@ -58,17 +96,17 @@ DAT RESET BUTTON
 
 #reset, #save{
 	cursor: pointer;
-    background: #aaa;
-    color: #fff;
+    background: var(--base-500);
+    color: var(--paper);
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 500;
     text-align: center;
     width: 100px;
     height: 30px;
     letter-spacing: 1px;
     padding: 2px 0;
     border-radius: 5px;
-    border-bottom: 2px solid #888;
+    border-bottom: 2px solid var(--base-600);
     position: absolute;
     margin-top:0px;
 
@@ -79,11 +117,11 @@ DAT RESET BUTTON
 }
 #reset:hover, #save:hover{
 	margin-top:-2px;
-	background: #bbb;
-	border-bottom-color: #999;
+	background: var(--base-400);
+	border-bottom-color: var(--base-500);
 }
 #reset:active, #save:active{
 	margin-top:2px;
-	background: #999;
-	border-bottom-color: #777;
+	background: var(--base-600);
+	border-bottom-color: var(--base-700);
 }

@@ -2,6 +2,43 @@
 BALLOT DESIGN
 **********************/
 
+/* Flexoki Color Variables */
+:root {
+    /* Base colors */
+    --paper: #FFFCF0;
+    --base-50: #F2F0E5;
+    --base-100: #E6E4D9;
+    --base-150: #DAD8CE;
+    --base-200: #CECCC3;
+    --base-300: #B7B5AC;
+    --base-400: #9F9D94;
+    --base-500: #878580;
+    --base-600: #6F6E69;
+    --base-700: #575653;
+    --base-800: #403E3C;
+    --base-900: #282726;
+    --base-950: #1C1B1A;
+    --black: #100F0F;
+    
+    /* Accent colors */
+    --red-600: #AF3029;
+    --red-400: #D14D41;
+    --orange-600: #BC5215;
+    --orange-400: #DA702C;
+    --yellow-600: #AD8301;
+    --yellow-400: #D0A215;
+    --green-600: #66800B;
+    --green-400: #879A39;
+    --cyan-600: #24837B;
+    --cyan-400: #3AA99F;
+    --blue-600: #205EA6;
+    --blue-400: #4385BE;
+    --purple-600: #5E409D;
+    --purple-400: #8B7EC8;
+    --magenta-600: #A02F6F;
+    --magenta-400: #CE5D97;
+}
+
 #ballot{
 
 	width: 375px;
@@ -11,11 +48,11 @@ BALLOT DESIGN
 	overflow: hidden;
 	float:left;
 
-	background: #F0EAD6;
-	color: #302707;
+	background: var(--base-50);
+	color: var(--base-900);
 
 	background-size: 100% 100%;
-	border: 2px solid #fff;
+	border: 2px solid var(--paper);
 
 	position: relative;
 

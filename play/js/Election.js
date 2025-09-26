@@ -151,7 +151,7 @@ Election.condorcet = function(model, options){
 		text += "<br>";
 		text += "побеждает " + "<b style='color:"+color+"'>"+ candidates[topWinner].label +"</b>";
 	}else{
-		model.canvas.style.borderColor = "#000"; // BLACK.
+		model.canvas.style.borderColor = "#100F0F"; // Flexoki black
 		text += "НИКТО не победил в &laquo;микровыборах&raquo;.<br>";
 		text += "</span>";
 		text += "<br>";
