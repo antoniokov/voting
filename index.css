@@ -52,6 +52,12 @@ article {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
+/* Back link styling */
+.back-link {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
 h1 {
     font-size: 45px;
     margin-bottom: 0;
