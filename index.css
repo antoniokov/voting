@@ -93,6 +93,33 @@ a:visited {
     color: var(--purple-600);
 }
 
+/* Language-specific link colors */
+a.lang-en {
+    color: var(--green-600);
+}
+
+a.lang-en:hover {
+    color: var(--green-400);
+}
+
+a.lang-en:visited {
+    color: var(--green-600);
+    opacity: 0.8;
+}
+
+a.lang-ru {
+    color: var(--yellow-600);
+}
+
+a.lang-ru:hover {
+    color: var(--yellow-400);
+}
+
+a.lang-ru:visited {
+    color: var(--yellow-600);
+    opacity: 0.8;
+}
+
 ol, ul {
     color: var(--black);
 }
